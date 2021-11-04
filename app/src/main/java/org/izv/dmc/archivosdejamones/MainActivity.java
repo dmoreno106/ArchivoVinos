@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG=MainActivity.class.getName()+"xyzyx";
     EditText etId;
     TextView tvContent;
-    public String fileName="data.txt";
+    public String fileName="data.csv";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initialize() {
+
+        try {
+            File f=new File(getFilesDir(), fileName);
+            FileWriter fw;
+        }catch (NullPointerException nu){
+            Log.v(TAG,"No se pudo crear el archivo");
+        }
+
         Button btAñadir=findViewById(R.id.btEditar);
         etId=findViewById(R.id.etId);
         tvContent=findViewById(R.id.tvContent);
@@ -37,11 +46,15 @@ public class MainActivity extends AppCompatActivity {
         btAñadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //comprobamos si el etId está vacio. Si lo está no llevará a la actividad NewVino
                 if(etId.getText().toString().isEmpty()){
                     Intent i=new Intent(getApplicationContext(), NewVino.class);
                     startActivity(i);
 
                 }else{
+                    //en caso contrario nos llevará a la actividad EditVino y podremos editar el vino si ya existe
+                    //si introducimos un id que no existe la actividad directamente se cerrará y volveremos a MainActivity
+
                     Intent i=new Intent(getApplicationContext(), EditVino.class);
                     i.putExtra("id",etId.getText().toString());
                     startActivity(i);
@@ -54,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
     private void readInternalFile() {
 
         String content="";
+        try{
+            //lee el archivo y escribe cada uno de los vinos en tvContent
         String[] vinos=readFile(getFilesDir(),fileName).toString().split("\n");
           for (String vino:vinos) {
             content+= "Id: "+vino.split(";")[0]+"\n"+
@@ -65,6 +80,11 @@ public class MainActivity extends AppCompatActivity {
                "Fecha: "+vino.split(";")[6]+"\n\n";
         }
         tvContent.setText(content);
+    }catch (NullPointerException np){
+        Log.v(TAG,"no hay vino ");
+    }catch(ArrayIndexOutOfBoundsException ae){
+        Log.v(TAG,"archivo vacio");
+    }
     }
     private String readFile(File file, String fileName){
         File f=new File(file,fileName);

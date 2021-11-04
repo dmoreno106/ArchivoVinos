@@ -24,7 +24,7 @@ public class NewVino extends AppCompatActivity {
     TextView tvVino;
     EditText etIdn,etNombre,etBodega,etColor,etOrigen,etGraduacion,etFecha;
     Button btAdd,btCancel;
-    public String fileName="data.txt";
+    public String fileName="data.csv";
     int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class NewVino extends AppCompatActivity {
             public void onClick(View view) {
 
                     if(!repitedID()){
+                        //escribe en el archivo csv
                         writeInternalFile();
 
                     }else{
@@ -69,21 +70,24 @@ public class NewVino extends AppCompatActivity {
         });
 
     }
-
+    //comprueba si la ID del nuevo vino ya existe en el catálogo
     private Boolean repitedID() {
+        Boolean repit = false;
+        try {
         String[] vinos =readFile(getFilesDir(),fileName).toString().split("\n");
         for (String vino:vinos) {
             Log.v(TAG,vino);
         }
-        Boolean repit = false;
             for (int i = 0; i < vinos.length; i++) {
                 if (vinos[i].split(";")[0].equals(etIdn.getText().toString())) {
                     repit = true;
                 }
-            }
+            }}catch (NullPointerException ne){
+        Log.v(TAG,"no");
+    }
             return repit;
         }
-
+    //crea y comprueba los campos del vino
     private Vino createVino() {String content=
                     etIdn.getText().toString()+";"+
                     etNombre.getText().toString()+";"+
@@ -114,6 +118,7 @@ public class NewVino extends AppCompatActivity {
         return ok;
     }
     private void writeInternalFile() {
+        //comprueba que los campos no estén vacios, si lo están da error
         if(etIdn.getText().toString().equals("")
                 ||etNombre.getText().toString().equals("")
                 ||etBodega.getText().toString().equals("")

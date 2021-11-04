@@ -46,7 +46,6 @@
         android:id="@+id/tvFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:text="@string/tv_fecha"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/etFecha"
@@ -73,7 +72,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="76dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="80dp"
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
@@ -102,24 +100,27 @@
         android:id="@+id/btAñadir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/bt_edit"
-        app:layout_constraintBottom_toTopOf="@+id/btBorrar"
-        app:layout_constraintStart_toStartOf="@+id/btBorrar"
-        app:layout_constraintTop_toBottomOf="@+id/tvFecha"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintEnd_toStartOf="@+id/btBorrar"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btBorrar" />
 
     <Button
         android:id="@+id/btCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/bt_cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btAñadir"
-        app:layout_constraintTop_toBottomOf="@+id/etFecha" />
+        app:layout_constraintStart_toEndOf="@+id/btBorrar" />
 
     <EditText
         android:id="@+id/etNombre"
@@ -201,10 +202,10 @@
         android:id="@+id/btBorrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="69dp"
         android:text="@string/bt_borrar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btAñadir" />
+        app:layout_constraintEnd_toStartOf="@+id/btCancel"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btAñadir"
+        app:layout_constraintTop_toTopOf="@+id/btCancel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

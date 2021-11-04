@@ -24,7 +24,7 @@ public class EditVino extends AppCompatActivity {
     TextView tvVino,tvId;
     EditText etNombre,etBodega,etColor,etOrigen,etGraduacion,etFecha;
     Button btEdit,btBorrar,btCancel;
-    String fileName="data.txt";
+    String fileName="data.csv";
     int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +86,7 @@ public class EditVino extends AppCompatActivity {
         });
     }
 
+    //crea y comprueba los campos del vino
     private Vino createVino() {String content=
                     String.valueOf(id)+";"+
                     etNombre.getText().toString()+";"+
@@ -116,9 +117,16 @@ public class EditVino extends AppCompatActivity {
         return ok;
     }
     private void writeInternalFile() {
-        String text=  Csv.getCsv(createVino());
-        System.out.println( Csv.getCsv(createVino()));
-        writeResult(writeFile(getFilesDir(),fileName,text));
+        //comprueba que los campos no estén vacios, si lo están no lo cambia
+        if(     etNombre.getText().toString().equals("")
+                ||etBodega.getText().toString().equals("")
+                ||etColor.getText().toString().equals("")
+                ||etOrigen.getText().toString().equals("")){
+
+        }else{
+            String text=Csv.getCsv(createVino());
+            writeResult(writeFile(getFilesDir(),fileName,text));
+        }
     }
     private void writeResult(Boolean result) {
         String mensaje = getString(R.string.message_ok);
@@ -128,10 +136,12 @@ public class EditVino extends AppCompatActivity {
         tvVino.setText(mensaje);
     }
 
+    //Comprueba si la id anteriormente introducida existe en el archivo de vinos
     private Boolean existeId() {
         String content="";
         String[] vinos=readFile(getFilesDir(),fileName).toString().split("\n");
         for (String vino:vinos) {
+            //si existe tomará los valores del vino y los pondrá en su correspondiente edit text
             if(vino.split(";")[0].equals(String.valueOf(id))){
 
                         etNombre.setText(vino.split(";")[1]);
@@ -164,6 +174,7 @@ public class EditVino extends AppCompatActivity {
         return texto;
     }
 
+    //busca en el archivo el id del vino y borra esa fila
     public static void borraVino(File file, String id, String archivo) {
         File f = new File(file, archivo);
         File f2 = new File(file, "temp.tmp");
