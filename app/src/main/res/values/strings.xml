@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Archivos de jamones</string>
+    <string name="tv_carta_vinos">Carta de Vinos</string>
+    <string name="et_id">Intorduzca ID</string>
+    <string name="tv_Vinos" />
+    <string name="bt_añadir">Añadir</string>
+    <string name="bt_borrar">Borrar</string>
+    <string name="bt_cancel">Cancelar</string>
+    <string name="tv_id">ID:</string>
+    <string name="tv_nombre">Nombre:</string>
+    <string name="tv_bodega">Bodega:</string>
+    <string name="tv_color">Color:</string>
+    <string name="tv_origen">Origen:</string>
+    <string name="tv_graduacion">Graduación:</string>
+    <string name="tv_fecha">Fecha:</string>
+    <string name="message_ok">Vino guardado</string>
+    <string name="message_no">Error</string>
+    <string name="tv_vino" />
+    <string name="title_activity_main2">MainActivity2</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="et_idn" />
+    <string name="id_existe">El id del vino ya existe</string>
+
+    <string name="bt_edit">Editar</string>
+    <string name="error">Error introduciendo Vino</string>
+</resources>
